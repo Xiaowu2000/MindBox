@@ -1,14 +1,10 @@
-import { useState } from "react";
-import KnowledgeCardManager from './KnowledgeCardManager';
+import React from 'react';
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
 
 function App() {
   return (
-    <div className="container mx-auto p-4">
-      <div className="text-3xl font-bold text-center text-red-800 bg-yellow-200 p-6 rounded-lg shadow-lg mb-4">
-        欢迎使用 React + TypeScript + Tailwind CSS + Vite
-      </div>
-      <KnowledgeCardManager />
-    </div>
+    <RouterProvider router={router} />
   );
 }
 

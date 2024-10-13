@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 
 interface KnowledgeCard {
   _id: string;
@@ -135,6 +137,12 @@ const KnowledgeCardManager: React.FC = () => {
               >
                 删除
               </button>
+              <Link
+                to={`/cards/${card._id}`}
+                className="bg-blue-500 text-white p-1 rounded hover:bg-blue-600"
+              >
+                详情
+              </Link>
             </div>
           </div>
         ))}

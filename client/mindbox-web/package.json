@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
