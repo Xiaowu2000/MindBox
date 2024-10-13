@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import cors from 'cors';  // 添加这行
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -24,6 +25,9 @@ const Card = mongoose.model('Card', CardSchema);
 
 app.use(bodyParser.json());
 
+// 添加 CORS 中间件
+app.use(cors());  // 添加这行
+
 // 创建新卡片
 app.post('/cards', async (req, res) => {
   try {
@@ -38,10 +42,18 @@ app.post('/cards', async (req, res) => {
 // 获取所有卡片
 app.get('/cards', async (req, res) => {
   try {
+    console.log('Attempting to fetch cards from database');
     const cards = await Card.find();
+    console.log('Fetched cards:', cards);
+    
+    if (cards.length === 0) {
+      console.log('No cards found in the database');
+    }
+
     res.json(cards);
   } catch (error) {
-    res.status(500).json({ error: '获取卡片失败' });
+    console.error('Error fetching cards:', error);
+    res.status(500).json({ error: '获取卡片失败', details: error });
   }
 });
 
@@ -98,6 +110,14 @@ app.get('/test-insert', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
+// 在服务器启动时，尝试获取所有卡片
+app.listen(port, async () => {
   console.log(`服务器运行在 http://localhost:${port}`);
+  
+  try {
+    const cards = await Card.find();
+    console.log('Initial cards in database:', cards);
+  } catch (error) {
+    console.error('Error fetching initial cards:', error);
+  }
 });
