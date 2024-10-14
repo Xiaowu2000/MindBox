@@ -7,10 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        'custom-blue': '#1da1f2',
+        "custom-blue": "#1da1f2",
       },
     },
   },
   plugins: [],
-}
-
+};

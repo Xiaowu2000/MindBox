@@ -5,7 +5,8 @@ import cors from 'cors';  // 添加这行
 
 const app = express();
 const port = process.env.PORT || 3000;
-const mongoURI = process.env.MONGODB_URI || 'mongodb://38.55.239.34:27017/knowledge_cards';
+// const mongoURI = process.env.MONGODB_URI || 'mongodb://38.55.239.34:27017/knowledge_cards';
+const mongoURI = 'mongodb://cardManager:8p9ks8xEL5QPD6tAwHaJ@38.55.239.34:27017/knowledge_cards';
 // const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/knowledge_cards';
 
 // 连接MongoDB
@@ -45,7 +46,6 @@ app.get('/cards', async (req, res) => {
     console.log('Attempting to fetch cards from database');
     const cards = await Card.find();
     console.log('Fetched cards:', cards);
-    
     if (cards.length === 0) {
       console.log('No cards found in the database');
     }
@@ -114,10 +114,4 @@ app.get('/test-insert', async (req, res) => {
 app.listen(port, async () => {
   console.log(`服务器运行在 http://localhost:${port}`);
   
-  try {
-    const cards = await Card.find();
-    console.log('Initial cards in database:', cards);
-  } catch (error) {
-    console.error('Error fetching initial cards:', error);
-  }
 });
